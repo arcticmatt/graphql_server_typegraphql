@@ -1,21 +1,10 @@
 import "reflect-metadata";
 
-import { Query, Resolver, buildSchema } from "type-graphql";
-
 import { ApolloServer } from "apollo-server";
-
-@Resolver()
-export default class TestResolver {
-  @Query(() => String)
-  async test(): Promise<string> {
-    return "hi";
-  }
-}
+import getSchema from "./starWarsSchema";
 
 async function main(): Promise<void> {
-  const schema = await buildSchema({
-    resolvers: [TestResolver],
-  });
+  const schema = await getSchema();
 
   // The ApolloServer constructor requires two parameters: your schema
   // definition and your set of resolvers.
