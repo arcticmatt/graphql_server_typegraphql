@@ -30,7 +30,6 @@ export abstract class Character {
   @Field({ description: "The name of the character.", nullable: true })
   name!: string;
 
-  // TODO: make function?
   @Field(() => [Character], {
     description:
       "The friends of the character, or an empty list if they have none.",
@@ -88,7 +87,6 @@ export class Human implements Character {
   @Field({ description: "The name of the human.", nullable: true })
   name!: string;
 
-  // TODO: resolver?
   @Field(() => [Character], {
     description:
       "The friends of the human, or any empty list if they have none.",
@@ -151,7 +149,6 @@ export class Droid implements Character {
   @Field({ description: "The name of the droid.", nullable: true })
   name!: string;
 
-  // TODO: resolver?
   @Field(() => [Character], {
     description:
       "The friends of the droid, or any empty list if they have none.",
