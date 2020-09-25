@@ -1,46 +1,42 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const apollo_server_1 = require("apollo-server");
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
-const typeDefs = apollo_server_1.gql `
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
-  }
-
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
-  }
-`;
-const books = [
-    {
-        title: "The Awakening",
-        author: "Kate Chopin",
-    },
-    {
-        title: "City of Glass",
-        author: "Paul Auster",
-    },
-];
-// Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
-const resolvers = {
-    Query: {
-        books: () => books,
-    },
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-const server = new apollo_server_1.ApolloServer({ typeDefs, resolvers });
-// The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
-});
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+const type_graphql_1 = require("type-graphql");
+const apollo_server_1 = require("apollo-server");
+let TestResolver = class TestResolver {
+    async test() {
+        return "hi";
+    }
+};
+__decorate([
+    type_graphql_1.Query(() => String),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TestResolver.prototype, "test", null);
+TestResolver = __decorate([
+    type_graphql_1.Resolver()
+], TestResolver);
+exports.default = TestResolver;
+async function main() {
+    const schema = await type_graphql_1.buildSchema({
+        resolvers: [TestResolver],
+    });
+    // The ApolloServer constructor requires two parameters: your schema
+    // definition and your set of resolvers.
+    const server = new apollo_server_1.ApolloServer({ schema });
+    // The `listen` method launches a web server.
+    server.listen().then(({ url }) => {
+        console.log(`🚀  Server ready at ${url}`);
+    });
+}
+main();
