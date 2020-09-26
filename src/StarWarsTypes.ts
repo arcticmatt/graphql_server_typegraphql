@@ -1,11 +1,15 @@
 import {
+  createUnionType,
   Field,
+  InputType,
   InterfaceType,
   ObjectType,
   registerEnumType,
   Root,
 } from "type-graphql";
 import { getFriends } from "./StarWardsData";
+
+// TODO: add custom stuff
 
 export enum Episode {
   NEW_HOPE = 4,
@@ -179,3 +183,20 @@ export class Droid implements Character {
   })
   primaryFunction!: string;
 }
+
+@InputType()
+export class SumInput {
+  @Field({ description: "An arbitrary integer." })
+  one!: number;
+
+  @Field({ description: "An arbitrary integer." })
+  two!: number;
+
+  @Field({ description: "An arbitrary integer." })
+  three!: number;
+}
+
+export const HumanOrDroid = createUnionType({
+  name: "HumanOrDroid",
+  types: () => [Human, Droid] as const,
+});

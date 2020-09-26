@@ -1,4 +1,4 @@
-import { Character, Droid, Human } from "./StarWarsTypes";
+import { Character, Droid, Human, SumInput } from "./StarWarsTypes";
 
 /**
  * This defines a basic set of data for our Star Wars Schema.
@@ -125,4 +125,11 @@ export function getHuman(id: string): Human | null {
  */
 export function getDroid(id: string): Droid | null {
   return new Droid(droidData[id]);
+}
+
+export function getHumanOrDroid(input: SumInput): Human | Droid {
+  if ((input.one + input.two + input.three) % 2 === 0) {
+    return new Human(humanData[Object.keys(humanData)[0]]);
+  }
+  return new Droid(droidData[Object.keys(droidData)[0]]);
 }

@@ -1,6 +1,13 @@
 import { Arg, Query, Resolver } from "type-graphql";
-import { getDroid, getHero, getHuman } from "./StarWardsData";
-import { Character, Droid, Episode, Human } from "./starWarsTypes";
+import { getDroid, getHero, getHuman, getHumanOrDroid } from "./StarWardsData";
+import {
+  Character,
+  Droid,
+  Episode,
+  Human,
+  HumanOrDroid,
+  SumInput,
+} from "./starWarsTypes";
 
 @Resolver()
 export class HeroResolver {
@@ -41,5 +48,16 @@ export class DroidResolver {
     id: string
   ): Droid | null {
     return getDroid(id);
+  }
+}
+
+@Resolver()
+export class HumanOrDroidResolver {
+  @Query(() => HumanOrDroid, { nullable: true })
+  humanOrDroid(
+    @Arg("input", () => SumInput)
+    input: SumInput
+  ): Human | Droid {
+    return getHumanOrDroid(input);
   }
 }
