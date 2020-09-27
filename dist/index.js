@@ -1,36 +1,13 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
-const type_graphql_1 = require("type-graphql");
 const apollo_server_1 = require("apollo-server");
-let TestResolver = class TestResolver {
-    async test() {
-        return "hi";
-    }
-};
-__decorate([
-    type_graphql_1.Query(() => String),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], TestResolver.prototype, "test", null);
-TestResolver = __decorate([
-    type_graphql_1.Resolver()
-], TestResolver);
-exports.default = TestResolver;
+const starWarsSchema_1 = __importDefault(require("./schema/starWarsSchema"));
 async function main() {
-    const schema = await type_graphql_1.buildSchema({
-        resolvers: [TestResolver],
-    });
+    const schema = await starWarsSchema_1.default();
     // The ApolloServer constructor requires two parameters: your schema
     // definition and your set of resolvers.
     const server = new apollo_server_1.ApolloServer({ schema });

@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
 import { ApolloServer } from "apollo-server";
-import getSchema from "./starWarsSchema";
+import getSchema from "./schema/starWarsSchema";
 
 async function main(): Promise<void> {
   const schema = await getSchema();

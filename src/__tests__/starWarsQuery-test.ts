@@ -1,8 +1,8 @@
 import "reflect-metadata";
 
-import { GraphQLSchema, graphql, graphqlSync } from "graphql";
+import { GraphQLSchema, graphql } from "graphql";
 
-import getSchema from "../starWarsSchema";
+import getSchema from "../schema/starWarsSchema";
 
 let schema: GraphQLSchema;
 beforeAll(async () => {
