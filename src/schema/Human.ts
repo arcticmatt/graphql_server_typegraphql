@@ -41,7 +41,7 @@ class Human implements Character {
       "The friends of the human, or any empty list if they have none.",
     nullable: "itemsAndList",
   })
-  friends(@Root() character: Character): Array<Character | null> {
+  friends(@Root() character: Character): Array<Character> {
     return getFriends(character);
   }
 

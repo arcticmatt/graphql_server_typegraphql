@@ -38,7 +38,7 @@ class Droid implements Character {
       "The friends of the droid, or any empty list if they have none.",
     nullable: "itemsAndList",
   })
-  friends(@Root() character: Character): Array<Character | null> {
+  friends(@Root() character: Character): Array<Character> {
     return getFriends(character);
   }
 

@@ -18,7 +18,7 @@ abstract class Character {
       "The friends of the character, or an empty list if they have none.",
     nullable: "itemsAndList",
   })
-  friends(@Root() character: Character): Array<Character | null> {
+  friends(@Root() character: Character): Array<Character> {
     // Need to provide an implementation in order to decorate it.
     return getFriends(character);
   }

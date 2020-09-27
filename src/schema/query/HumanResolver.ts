@@ -10,7 +10,7 @@ export class HumanResolver {
       description: "id of the human",
     })
     id: string
-  ): Human | null {
+  ): Human {
     return getHuman(id);
   }
 }

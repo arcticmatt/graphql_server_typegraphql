@@ -7,11 +7,9 @@ import Human from "../schema/Human";
 /**
  * Helper function to get a character by ID.
  */
-export default function getCharacter(id: string): Character | null {
+export default function getCharacter(id: string): Character {
   if (humanData[id]) {
     return new Human(humanData[id]);
-  } else if (droidData[id]) {
-    return new Droid(droidData[id]);
   }
-  return null;
+  return new Droid(droidData[id]);
 }

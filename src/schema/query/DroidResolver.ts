@@ -10,7 +10,7 @@ export class DroidResolver {
       description: "id of the droid",
     })
     id: string
-  ): Droid | null {
+  ): Droid {
     return getDroid(id);
   }
 }
